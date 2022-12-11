@@ -1,13 +1,23 @@
 <template>
-  <div></div>
+  <div class="main-page">
+    <CityCard></CityCard>
+  </div>
 </template>
 
 <script>
+  import CityCard from "@/components/CityCard/CityCard";
+
   export default {
-    name: "MainPage"
+    name: "MainPage",
+    components: {
+      CityCard,
+    }
   }
 </script>
 
 <style scoped>
-
+  .main-page {
+    display: flex;
+    justify-content: center;
+  }
 </style>
