@@ -1,20 +1,24 @@
 <template>
-  <nav>
-    <img :src="logo" alt="" class="logo">
-    <div class="buttons-wrapper">
-      <CardButton
-        :class="['main', { active: this.currentNavigation === 'Main' }]"
-        :button-text="'Main'"
-        @click.native="goTo('/')"
-      ></CardButton>
+  <div class="root">
+    <nav>
+      <img :src="logo" alt="" class="logo">
+      <div class="buttons-wrapper">
+        <CardButton
+          :class="['main', { active: this.currentNavigation === 'Main' }]"
+          :button-text="'Main'"
+          @click.native="goTo('/')"
+        ></CardButton>
 
-      <CardButton
-        :class="['favourites', { active: this.currentNavigation === 'Favourites' }]"
-        :button-text="'Favourites'"
-        @click.native="goTo('/favourites')"
-      ></CardButton>
-    </div>
-  </nav>
+        <CardButton
+          :class="['favourites', { active: this.currentNavigation === 'Favourites' }]"
+          :button-text="'Favourites'"
+          @click.native="goTo('/favourites')"
+        ></CardButton>
+      </div>
+    </nav>
+
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
