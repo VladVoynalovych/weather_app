@@ -2,8 +2,17 @@
   <nav>
     <img :src="logo" alt="" class="logo">
     <div class="buttons-wrapper">
-      <CardButton class="main" :button-text="'Main'"></CardButton>
-      <CardButton class="favourites" :button-text="'Favourites'"></CardButton>
+      <CardButton
+        :class="['main', { active: this.currentNavigation === 'Main' }]"
+        :button-text="'Main'"
+        @click.native="goTo('/')"
+      ></CardButton>
+
+      <CardButton
+        :class="['favourites', { active: this.currentNavigation === 'Favourites' }]"
+        :button-text="'Favourites'"
+        @click.native="goTo('/favourites')"
+      ></CardButton>
     </div>
   </nav>
 </template>
@@ -25,6 +34,16 @@ export default {
   data() {
     return {
       logo
+    }
+  },
+  methods: {
+    goTo(location) {
+      this.$router.push(location).catch(() => {});
+    }
+  },
+  computed: {
+    currentNavigation() {
+      return this.$route.name;
     }
   }
 }
