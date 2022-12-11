@@ -24,6 +24,9 @@
     min-width: 100px;
     min-height: 35px;
     border: 1px solid #c4c4c4;
+    background-color: #ffffff;
+    transition: background-color .5s ease 0s,
+                border .5s ease 0s;
   }
 
   .card-button.active {
@@ -39,7 +42,8 @@
     line-height: 1;
     text-align: center;
     color: #2b2b2b;
-    transition: color .5s ease 0s, background-color .5s ease 0s;
+    transition: color .5s ease 0s,
+                background-color .5s ease 0s;
   }
 
   .card-button.active .button-text {
