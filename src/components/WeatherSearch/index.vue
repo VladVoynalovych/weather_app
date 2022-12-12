@@ -16,12 +16,13 @@
           v-for="(item, index) in currentSearchCities"
           v-text="item.name"
           :key="index"
-          @click="choseCity(item)"
+          @click="choseCityAutocomplete(item)"
         ></li>
       </ul>
     </div>
     <card-button
       :button-text="'Search'"
+      @click.native="handleSearch"
     ></card-button>
   </div>
 </template>
@@ -29,6 +30,8 @@
 <script>
   const citiesData = require('./cities.json');
   import CardButton from "@/components/CardButton/CardButton";
+
+  import { mapActions } from 'vuex';
 
   export default {
     name: "AutocompleteSearch",
@@ -59,7 +62,7 @@
       }
     },
     methods: {
-      choseCity(cityData) {
+      choseCityAutocomplete(cityData) {
         this.chosenCity = {
           name: cityData.name,
           coords: cityData.coord,
@@ -70,10 +73,37 @@
         this.isCityChosen = true;
 
       },
+      async choseCity() {
+        let cities = await this.searchCities(this.searchValue);
+
+        if (cities.length) {
+          this.chosenCity = {
+            name: cities[0].name,
+            coords: cities[0].coord,
+          };
+
+          this.currentSearchCities.length = 0;
+          this.isCityChosen = true;
+        }
+
+      },
       async searchCities(name) {
         return this.cities.filter((item) => {
           return item.name.toLowerCase().indexOf(name.toLowerCase()) !== -1;
+        }).sort((a, b) => {
+          return a.name.indexOf(name) - b.name.indexOf(name);
         })
+      },
+      ...mapActions('weatherModule',['uploadWeatherContent']),
+      handleSearch() {
+        if (this.chosenCity) {
+          this.uploadWeatherContent(this.chosenCity.coords);
+        } else {
+          this.choseCity();
+          this.uploadWeatherContent(this.chosenCity.coords);
+        }
+        this.chosenCity = '';
+        this.searchValue = '';
       }
     },
   }
