@@ -71,10 +71,10 @@
         this.searchValue = cityData.name;
         this.currentSearchCities.length = 0;
         this.isCityChosen = true;
-
       },
       async choseCity() {
         let cities = await this.searchCities(this.searchValue);
+        // debugger // eslint-disable-line no-debugger
 
         if (cities.length) {
           this.chosenCity = {
@@ -95,11 +95,12 @@
         })
       },
       ...mapActions('weatherModule',['uploadWeatherContent']),
-      handleSearch() {
+      async handleSearch() {
         if (this.chosenCity) {
           this.uploadWeatherContent(this.chosenCity.coords);
         } else {
-          this.choseCity();
+          await this.choseCity();
+          debugger // eslint-disable-line no-debugger
           this.uploadWeatherContent(this.chosenCity.coords);
         }
         this.chosenCity = '';
