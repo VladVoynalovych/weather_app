@@ -14,6 +14,8 @@ export async function setupWeather(coords) {
     }
   });
 
+  console.log(weatherList);
+
   const weatherListByDays = splitWeatherByDate(weatherList);
 
   const weather = {
@@ -30,9 +32,12 @@ function splitWeatherByDate(weatherList) {
 
   let dailyWeatherList = [];
 
-  weatherList.forEach((item) => {
+  weatherList.forEach((item, index) => {
     if (currentDay === new Date(item.date).getDate()) {
       dailyWeatherList.push(item)
+      if (index === weatherList.length - 1) {
+        weatherListByDate.push(dailyWeatherList);
+      }
     } else {
       currentDay = new Date(item.date).getDate();
       weatherListByDate.push(dailyWeatherList);
