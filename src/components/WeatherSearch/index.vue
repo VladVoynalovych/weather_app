@@ -22,21 +22,31 @@
     </div>
     <card-button
       :button-text="'Search'"
-      @click.native="handleSearch"
+      @click.native="search"
     ></card-button>
+
+    <info-modal
+      :opened.sync="isModalOpened"
+      :info-title="'Warning'"
+      :info-text="'You can`t add new card, max amount 5 cards'"
+    ></info-modal>
   </div>
 </template>
 
 <script>
+  /* eslint-disable */
+
   const citiesData = require('./cities.json');
   import CardButton from "@/components/CardButton/CardButton";
+  import InfoModal from "@/components/InfoModal";
 
-  import { mapActions } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   export default {
     name: "AutocompleteSearch",
     components: {
       CardButton,
+      InfoModal
     },
     data() {
       return {
@@ -44,13 +54,15 @@
         cities: citiesData,
         chosenCity: '',
         currentSearchCities: '',
-        isCityChosen: false
+        isCityChosen: false,
+        isModalOpened: false
       }
     },
     computed: {
       isAutocompleteShown() {
         return this.searchValue.length > 0 && this.currentSearchCities.length > 0;
-      }
+      },
+      ...mapGetters('weatherModule', ['getWeatherContentLength', 'getWeatherContent']),
     },
     watch: {
       async searchValue(newVal) {
@@ -96,14 +108,28 @@
       },
       ...mapActions('weatherModule',['uploadWeatherContent']),
       async handleSearch() {
-        if (this.chosenCity) {
-          this.uploadWeatherContent(this.chosenCity.coords);
+        if (this.getWeatherContentLength !== 5) {
+
+          if (this.chosenCity) {
+            this.uploadWeatherContent(this.chosenCity.coords);
+          } else {
+            await this.choseCity();
+            this.uploadWeatherContent(this.chosenCity.coords);
+          }
+          this.chosenCity = '';
+          this.searchValue = '';
         } else {
-          await this.choseCity();
-          this.uploadWeatherContent(this.chosenCity.coords);
+          this.isModalOpened = true;
         }
-        this.chosenCity = '';
-        this.searchValue = '';
+      },
+      async search() {
+        const isNotExist = this.getWeatherContent.findIndex((city) => {
+          return this.chosenCity.name === city.cityName
+        }) === -1;
+
+        if (isNotExist) {
+          await this.handleSearch()
+        }
       }
     },
   }
