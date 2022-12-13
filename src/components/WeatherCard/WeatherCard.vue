@@ -3,9 +3,11 @@
     class="weather-card"
   >
     <p class="date" v-text="date"></p>
-    <p class="month" v-text="month"></p>
     <img class="weather-icon" alt="Weather Icon" :src="iconSettings[weatherIcon]">
-    <p class="temperature">{{minTemperature}} °C ... {{maxTemperature}} °C</p>
+    <p class="temperature">Temperature: {{temperature}} °C</p>
+    <p class="feels-like">Feels like: {{feelsLike}} °C</p>
+    <p class="wind">Wind: {{wind}} m/s</p>
+    <p class="humidity">Humidity: {{humidity}} %</p>
   </div>
 </template>
 
@@ -42,11 +44,19 @@ export default {
       validator: (value) => iconNames.includes(value),
       default: "03d",
     },
-    minTemperature: {
+    temperature: {
       type: String,
       default: "10",
     },
-    maxTemperature: {
+    feelsLike: {
+      type: String,
+      default: "10",
+    },
+    wind: {
+      type: String,
+      default: "10",
+    },
+    humidity: {
       type: String,
       default: "10",
     },
@@ -116,10 +126,13 @@ export default {
     margin: 0 auto 5px auto;
   }
 
-  .temperature {
+  .temperature,
+  .feels-like,
+  .wind,
+  .humidity {
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.187;
     color: #2b2b2b;
   }
