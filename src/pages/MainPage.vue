@@ -13,7 +13,7 @@
 <script>
   import CityCard from "@/components/CityCard/CityCard";
 
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
     name: "MainPage",
@@ -21,10 +21,15 @@
       CityCard,
     },
     computed: {
-      ...mapGetters('weatherModule', ['getWeatherContent'])
+      ...mapGetters('weatherModule', ['getWeatherContent', 'getWeatherContentLength'])
     },
     methods: {
-
+      ...mapActions('weatherModule', ['getCityByIp'])
+    },
+    mounted() {
+      if (!this.getWeatherContentLength) {
+        this.getCityByIp()
+      }
     }
   }
 </script>
