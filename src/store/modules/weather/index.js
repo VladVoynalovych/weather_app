@@ -1,4 +1,5 @@
 import { setupWeather } from "@/services/weatherSetup.service";
+import { getCoords } from "@/services/ipSetup.service";
 
 const state = () => ({
   weather: [],
@@ -25,6 +26,11 @@ const actions = {
   },
   deleteWeatherCity({ commit }, payload) {
     commit('deleteCity', payload);
+  },
+  async getCityByIp({ commit }) {
+    const coords = await getCoords();
+    const weather = await setupWeather(coords)
+    commit('addWeatherContent', weather);
   }
 }
 
