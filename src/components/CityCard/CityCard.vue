@@ -43,8 +43,21 @@
     <weather-chart
       :labels="getDateList(weatherList[0])"
       :chart-data="getWeatherList(weatherList[0])"
-      :type="'Line'"
+      :type="'line'"
     ></weather-chart>
+    <section class="activity-buttons-wrapper">
+      <card-button
+        :class="['weather-button', 'weather-button_favourites']"
+        :button-text="'Add to favourites'"
+      ></card-button>
+
+      <card-button
+        :class="['weather-button', 'weather-button_delete']"
+        :button-text="'Delete'"
+      ></card-button>
+    </section>
+
+    <confirm-modal></confirm-modal>
   </div>
 </template>
 
@@ -55,6 +68,7 @@
   import WeatherCard from "@/components/WeatherCard/WeatherCard";
   import WeatherChart from "@/components/WeatherChart";
   import CardButton from "@/components/CardButton/CardButton";
+  import ConfirmModal from "@/components/ConfirmModal";
 
   export default {
     name: "CityCard",
@@ -82,6 +96,7 @@
       WeatherCard,
       WeatherChart,
       CardButton,
+      ConfirmModal,
     },
     methods: {
       getFormattedDate(date) {
@@ -144,8 +159,10 @@
     font-size: 2vw;
   }
 
-  .weather-chart {
-    margin-top: 10px;
+  .activity-buttons-wrapper {
+    display: flex;
+    width: max-content;
+    margin-left: auto;
+    margin-bottom: 10px;
   }
-
 </style>
