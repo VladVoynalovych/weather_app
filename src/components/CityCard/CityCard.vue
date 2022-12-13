@@ -1,6 +1,6 @@
 <template>
   <div class="city-card">
-    <h1 class="city-name">{{cityName}}</h1>
+    <h1 class="city-name">{{cityCard.cityName}}</h1>
     <section class="weather-type-buttons-wrapper">
       <card-button
         :class="['weather-button', 'weather-button_daily', { active: !isWeeklyWeatherShow }]"
@@ -16,11 +16,11 @@
     </section>
     <section
       class="weather-cards-wrapper"
-      v-show="weatherList"
+      v-show="cityCard.weatherList"
     >
       <weather-card
         v-show="isWeeklyWeatherShow"
-        v-for="(weatherItem, weatherIndex) in weatherList"
+        v-for="(weatherItem, weatherIndex) in cityCard.weatherList"
         :key="weatherIndex"
         :date="getFormattedDate(weatherItem[0].date)"
         :temperature="String(weatherItem[0].temperature)"
@@ -41,23 +41,31 @@
       ></weather-card>
     </section>
     <weather-chart
-      :labels="getDateList(weatherList[0])"
-      :chart-data="getWeatherList(weatherList[0])"
+      :labels="getDateList(cityCard.weatherList[0])"
+      :chart-data="getWeatherList(cityCard.weatherList[0])"
       :type="'line'"
+      :id="`${cityCard.cityName}Chart`"
     ></weather-chart>
     <section class="activity-buttons-wrapper">
       <card-button
         :class="['weather-button', 'weather-button_favourites']"
         :button-text="'Add to favourites'"
+        @click.native="checkConfirmation"
       ></card-button>
 
       <card-button
         :class="['weather-button', 'weather-button_delete']"
         :button-text="'Delete'"
+        @click.native="deleteCity"
       ></card-button>
     </section>
 
-    <confirm-modal></confirm-modal>
+    <confirm-modal
+      @confirmStatus="addFavourite"
+      :opened.sync="isModalOpened"
+      :confirm-title="'Add favourite confirmation'"
+      :confirm-text="'Are you sure you want to add to favourites?'"
+    ></confirm-modal>
   </div>
 </template>
 
@@ -70,26 +78,39 @@
   import CardButton from "@/components/CardButton/CardButton";
   import ConfirmModal from "@/components/ConfirmModal";
 
+  import { mapActions } from "vuex";
+
   export default {
     name: "CityCard",
     props: {
-      cityName: {
-        type: String,
-        default: 'City Name'
+      cityCard: {
+        type: Object,
+        default: () => {},
+        subtype: {
+          cityName: {
+            type: String,
+            default: 'City Name'
+          },
+          weatherList: {
+            type: Array,
+            default: () => [],
+          }
+        }
       },
-      weatherList: {
-        type: Array,
-        default: () => [],
+      index: {
+        type: Number,
+        default: 0,
       }
     },
     computed: {
       dailyWeather() {
-        return this.weatherList[0][0];
+        return this.cityCard.weatherList[0][0];
       }
     },
     data() {
       return {
-        isWeeklyWeatherShow: false
+        isWeeklyWeatherShow: false,
+        isModalOpened: false,
       }
     },
     components: {
@@ -115,6 +136,22 @@
         });
 
         return weather;
+      },
+
+      ...mapActions('favouritesModule', ['addNewFavourite']),
+      ...mapActions('weatherModule', ['addToFavourite', 'deleteWeatherCity']),
+
+      checkConfirmation() {
+        this.isModalOpened = true;
+      },
+      addFavourite(confirmStatus) {
+        if (confirmStatus && !this.cityCard.isFavourite) {
+          this.addToFavourite(this.index);
+          this.addNewFavourite(this.cityCard);
+        }
+      },
+      deleteCity() {
+        this.deleteWeatherCity(this.index);
       }
     }
   }
