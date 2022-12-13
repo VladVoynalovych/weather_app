@@ -24,24 +24,26 @@ export async function setupWeather(coords) {
   return weather;
 }
 
-function splitWeatherByDate(weatherList) {
+function splitWeatherByDate(weatherList, daysCount = 5) {
   let weatherListByDate = [];
   let currentDay = new Date(Date.now()).getDate();
 
   let dailyWeatherList = [];
+  let daysPassed = 0;
 
-  weatherList.forEach((item, index) => {
+  weatherList.forEach((item) => {
     if (currentDay === new Date(item.date).getDate()) {
       dailyWeatherList.push(item)
-      if (index === weatherList.length - 1) {
-        weatherListByDate.push(dailyWeatherList);
-      }
     } else {
-      currentDay = new Date(item.date).getDate();
-      weatherListByDate.push(dailyWeatherList);
+      if (daysPassed < daysCount) {
+        currentDay = new Date(item.date).getDate();
+        daysPassed++;
+        console.log(daysPassed)
+        weatherListByDate.push(dailyWeatherList);
 
-      dailyWeatherList = [];
-      dailyWeatherList.push(item)
+        dailyWeatherList = [];
+        dailyWeatherList.push(item)
+      }
     }
   });
 
