@@ -6,6 +6,9 @@ const state = () => ({
 const getters = {
   getFavouritesContent(state) {
     return state.favouritesWeather;
+  },
+  getFavouritesContentLength(state) {
+    return state.favouritesWeather.length;
   }
 }
 
@@ -16,7 +19,10 @@ const actions = {
   },
   addNewFavourite({ commit }, payload) {
     commit('addFavouritesContent', payload)
-  }
+  },
+  deleteFavouritesCity({ commit }, payload) {
+    commit('deleteCity', payload);
+  },
 }
 
 // mutations
@@ -26,6 +32,9 @@ const mutations = {
   },
   setFavouritesContent(state, payload) {
     state.favouritesWeather = payload;
+  },
+  deleteCity(state, payload) {
+    state.favouritesWeather.splice(payload, 1)
   }
 }
 
