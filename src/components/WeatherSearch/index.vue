@@ -100,7 +100,6 @@
           this.uploadWeatherContent(this.chosenCity.coords);
         } else {
           await this.choseCity();
-          debugger // eslint-disable-line no-debugger
           this.uploadWeatherContent(this.chosenCity.coords);
         }
         this.chosenCity = '';
