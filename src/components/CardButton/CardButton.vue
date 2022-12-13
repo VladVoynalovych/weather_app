@@ -27,9 +27,11 @@
     background-color: #ffffff;
     transition: background-color .5s ease 0s,
                 border .5s ease 0s;
+    padding: 10px 20px;
   }
 
-  .card-button.active {
+  .card-button.active,
+  .card-button:active {
     border: 1px solid #2196f3;
     background-color: #2196f3;
   }
@@ -42,11 +44,12 @@
     line-height: 1;
     text-align: center;
     color: #2b2b2b;
-    transition: color .5s ease 0s,
-                background-color .5s ease 0s;
+    transition: color .1s ease 0s,
+                background-color .1s ease 0s;
   }
 
-  .card-button.active .button-text {
+  .card-button.active .button-text,
+  .card-button:active .button-text {
     color: #fff;
   }
 </style>
