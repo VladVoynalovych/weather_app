@@ -23,18 +23,25 @@ const actions = {
   deleteFavouritesCity({ commit }, payload) {
     commit('deleteCity', payload);
   },
+  getFavouritesFromLocalStorage({ commit }) {
+    if (localStorage.getItem('favouriteWeather')) {
+      commit('setFavouritesContent', JSON.parse(localStorage.getItem('favouriteWeather')));
+    }
+  }
 }
 
 // mutations
 const mutations = {
   addFavouritesContent(state, payload) {
     state.favouritesWeather.push(payload);
+    localStorage.setItem('favouriteWeather', JSON.stringify(state.favouritesWeather));
   },
   setFavouritesContent(state, payload) {
     state.favouritesWeather = payload;
   },
   deleteCity(state, payload) {
     state.favouritesWeather.splice(payload, 1)
+    localStorage.setItem('favouriteWeather', JSON.stringify(state.favouritesWeather));
   }
 }
 

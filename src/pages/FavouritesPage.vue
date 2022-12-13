@@ -13,7 +13,7 @@
 <script>
   import FavouriteCityCard from "@/components/FavouriteCityCard";
 
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
     name: "FavouritesPage",
@@ -21,10 +21,16 @@
       FavouriteCityCard,
     },
     computed: {
-      ...mapGetters('favouritesModule', ['getFavouritesContent'])
+      ...mapGetters('favouritesModule', ['getFavouritesContent', 'getFavouritesContentLength'])
     },
     methods: {
+      ...mapActions('favouritesModule', ['getFavouritesFromLocalStorage'])
     },
+    mounted() {
+      if (!this.getFavouritesContentLength) {
+        this.getFavouritesFromLocalStorage()
+      }
+    }
   }
 </script>
 
