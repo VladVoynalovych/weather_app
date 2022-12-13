@@ -66,6 +66,12 @@
       :confirm-title="'Add favourite confirmation'"
       :confirm-text="'Are you sure you want to add to favourites?'"
     ></confirm-modal>
+
+    <info-modal
+      :opened.sync="infoModalOpened"
+      :info-title="'Warning'"
+      :info-text="'You can`t add new card to favourites, max amount 5 cards'"
+    ></info-modal>
   </div>
 </template>
 
@@ -77,6 +83,7 @@
   import WeatherChart from "@/components/WeatherChart";
   import CardButton from "@/components/CardButton/CardButton";
   import ConfirmModal from "@/components/ConfirmModal";
+  import InfoModal from "@/components/InfoModal";
 
   import { mapActions, mapGetters } from "vuex";
 
@@ -106,12 +113,13 @@
       dailyWeather() {
         return this.cityCard.weatherList[0][0];
       },
-      ...mapGetters('favouritesModule', ['getFavouritesContent'])
+      ...mapGetters('favouritesModule', ['getFavouritesContent', 'getFavouritesContentLength'])
     },
     data() {
       return {
         isWeeklyWeatherShow: false,
         isModalOpened: false,
+        infoModalOpened: false,
       }
     },
     components: {
@@ -119,6 +127,7 @@
       WeatherChart,
       CardButton,
       ConfirmModal,
+      InfoModal,
     },
     methods: {
       getFormattedDate(date) {
@@ -148,8 +157,15 @@
       },
       checkConfirmation() {
         if (!this.isPresentInFavourites()) {
-          this.isModalOpened = true;
+          if (this.checkFavouritesCount()) {
+            this.infoModalOpened = true
+          } else {
+            this.isModalOpened = true;
+          }
         }
+      },
+      checkFavouritesCount(maxItems = 5) {
+        return Number(this.getFavouritesContentLength) === maxItems;
       },
       addFavourite(confirmStatus) {
         if (confirmStatus) {
