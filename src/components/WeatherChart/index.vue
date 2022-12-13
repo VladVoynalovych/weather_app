@@ -1,6 +1,6 @@
 <template>
   <section class="weather-chart">
-    <canvas class="weather-chart_canvas" id="myChart"></canvas>
+    <canvas class="weather-chart_canvas" :id="id"></canvas>
   </section>
 </template>
 
@@ -35,6 +35,10 @@
       tension: {
         type: Number,
         default: 0.1
+      },
+      id: {
+        type: String,
+        default: 'chart'
       }
     },
     data() {
@@ -42,7 +46,7 @@
       }
     },
     mounted() {
-      const ctx = document.getElementById('myChart').getContext('2d');
+      const ctx = document.getElementById(`${this.id}`).getContext('2d');
 
       const myChart = new Chart(ctx, {
         type: this.type,
