@@ -78,7 +78,7 @@
   import CardButton from "@/components/CardButton/CardButton";
   import ConfirmModal from "@/components/ConfirmModal";
 
-  import { mapActions } from "vuex";
+  import { mapActions, mapGetters } from "vuex";
 
   export default {
     name: "CityCard",
@@ -105,7 +105,8 @@
     computed: {
       dailyWeather() {
         return this.cityCard.weatherList[0][0];
-      }
+      },
+      ...mapGetters('favouritesModule', ['getFavouritesContent'])
     },
     data() {
       return {
@@ -140,9 +141,13 @@
 
       ...mapActions('favouritesModule', ['addNewFavourite']),
       ...mapActions('weatherModule', ['addToFavourite', 'deleteWeatherCity']),
-
+      isPresentInFavourites() {
+        return this.getFavouritesContent.findIndex(( item ) => {
+          return item.cityName === this.cityCard.cityName
+        }) !== -1;
+      },
       checkConfirmation() {
-        if (!this.cityCard.isFavourite) {
+        if (!this.isPresentInFavourites()) {
           this.isModalOpened = true;
         }
       },
@@ -154,6 +159,7 @@
       },
       deleteCity() {
         this.deleteWeatherCity(this.index);
+        this.getFavouritesContent.findIndex()
       }
     }
   }
