@@ -1,5 +1,6 @@
 import { uploadWeather } from './http/weatherUpload.service'
 import { v4 as uuidv4 } from 'uuid';
+/* eslint-disable */
 
 export async function setupWeather(coords) {
   const uploadedWeather = await uploadWeather(coords);
@@ -34,19 +35,21 @@ function splitWeatherByDate(weatherList, daysCount = 5) {
   let dailyWeatherList = [];
   let daysPassed = 0;
 
-  weatherList.forEach((item) => {
+  weatherList.forEach((item, index) => {
     if (currentDay === new Date(item.date).getDate()) {
       dailyWeatherList.push(item)
-    } else {
-      if (daysPassed < daysCount) {
-        currentDay = new Date(item.date).getDate();
-        daysPassed++;
-        console.log(daysPassed)
+      if (index === weatherList.length - 1) {
         weatherListByDate.push(dailyWeatherList);
-
-        dailyWeatherList = [];
-        dailyWeatherList.push(item)
       }
+    } else {
+      currentDay = new Date(item.date).getDate();
+      if (daysPassed < daysCount && dailyWeatherList.length) {
+        daysPassed++;
+        weatherListByDate.push(dailyWeatherList);
+      }
+
+      dailyWeatherList = [];
+      dailyWeatherList.push(item)
     }
   });
 
