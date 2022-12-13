@@ -14,8 +14,6 @@ export async function setupWeather(coords) {
     }
   });
 
-  console.log(weatherList);
-
   const weatherListByDays = splitWeatherByDate(weatherList);
 
   const weather = {
