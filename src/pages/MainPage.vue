@@ -3,8 +3,8 @@
     <city-card
       v-for="(cityCard, cityIndex) in getWeatherContent"
       :key="cityIndex"
-      :city-name="cityCard.cityName"
-      :weather-list="cityCard.weatherList"
+      :index="cityIndex"
+      :city-card="cityCard"
     >
     </city-card>
   </article>
