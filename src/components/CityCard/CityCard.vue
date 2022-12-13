@@ -142,10 +142,12 @@
       ...mapActions('weatherModule', ['addToFavourite', 'deleteWeatherCity']),
 
       checkConfirmation() {
-        this.isModalOpened = true;
+        if (!this.cityCard.isFavourite) {
+          this.isModalOpened = true;
+        }
       },
       addFavourite(confirmStatus) {
-        if (confirmStatus && !this.cityCard.isFavourite) {
+        if (confirmStatus) {
           this.addToFavourite(this.index);
           this.addNewFavourite(this.cityCard);
         }
