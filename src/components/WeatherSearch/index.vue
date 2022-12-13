@@ -6,6 +6,7 @@
           class="weather-search_search-input"
           type="text"
           v-model="searchValue"
+          @input="updateSearchValue"
         >
       </label>
       <ul
@@ -66,14 +67,18 @@
     },
     watch: {
       async searchValue(newVal) {
-        if (!this.isCityChosen) {
-          this.currentSearchCities = await this.searchCities(newVal);
-        } else {
-          this.isCityChosen = false;
-        }
+
       }
     },
     methods: {
+      async updateSearchValue() {
+        if (!this.isCityChosen) {
+          this.currentSearchCities = await this.searchCities(this.searchValue);
+        } else {
+          this.isCityChosen = false;
+        }
+        console.log('changed')
+      },
       choseCityAutocomplete(cityData) {
         this.chosenCity = {
           name: cityData.name,
