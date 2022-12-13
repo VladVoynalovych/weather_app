@@ -1,5 +1,8 @@
 <template>
-  <section :class="['confirm-modal', { 'confirm-modal_opened': opened }]">
+  <section
+    :class="['confirm-modal', { 'confirm-modal_opened': opened }]"
+    :style="`top: ${ scrollY }px`"
+  >
     <div class="confirm-modal_content">
       <p class="confirm-modal_title">{{confirmTitle}}</p>
       <p class="confirm-modal_confirm-text">{{confirmText}}</p>
@@ -43,10 +46,20 @@
         default: false
       }
     },
+    data() {
+      return {
+        scrollY: 0,
+      }
+    },
     methods: {
       confirmation(confirmValue) {
         this.$emit('confirmStatus', confirmValue);
         this.$emit('update:opened', false);
+      }
+    },
+    watch: {
+      opened() {
+        this.scrollY = document.documentElement.scrollTop || document.body.scrollTop;
       }
     }
   }
