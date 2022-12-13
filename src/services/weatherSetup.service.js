@@ -1,4 +1,5 @@
 import { uploadWeather } from './http/weatherUpload.service'
+import { v4 as uuidv4 } from 'uuid';
 
 export async function setupWeather(coords) {
   const uploadedWeather = await uploadWeather(coords);
@@ -18,6 +19,8 @@ export async function setupWeather(coords) {
 
   const weather = {
     cityName: uploadedWeather.data.city.name,
+    isFavourite: false,
+    uuid: uuidv4(),
     weatherList: weatherListByDays
   }
 
