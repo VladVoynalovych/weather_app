@@ -45,7 +45,7 @@
     },
     methods: {
       confirmation(confirmValue) {
-        this.$emit('update:confirmValue', confirmValue);
+        this.$emit('confirmStatus', confirmValue);
         this.$emit('update:opened', false);
       }
     }
@@ -64,11 +64,13 @@
     height: 100%;
     background-color: rgba(33, 33, 33, 0.46);
     transform: scale(0);
-    transition: transform 0.1s;
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.15s;
   }
 
   .confirm-modal_opened {
     transform: scale(1);
+    opacity: 1;
   }
 
   .confirm-modal_content {
