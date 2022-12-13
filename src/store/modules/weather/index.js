@@ -8,6 +8,9 @@ const state = () => ({
 const getters = {
   getWeatherContent(state) {
     return state.weather;
+  },
+  getWeatherContentLength(state) {
+    return state.weather.length;
   }
 }
 
@@ -16,6 +19,12 @@ const actions = {
   async uploadWeatherContent({ commit }, payload) {
     const weather = await setupWeather(payload);
     commit('addWeatherContent', weather);
+  },
+  addToFavourite({ commit }, payload) {
+    commit('setFavourite', payload);
+  },
+  deleteWeatherCity({ commit }, payload) {
+    commit('deleteCity', payload);
   }
 }
 
@@ -23,6 +32,12 @@ const actions = {
 const mutations = {
   addWeatherContent(state, payload) {
     state.weather.push(payload);
+  },
+  setFavourite(state, payload) {
+    state.weather[payload].isFavourite = true;
+  },
+  deleteCity(state, payload) {
+    state.weather.splice(payload, 1)
   }
 }
 
