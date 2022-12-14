@@ -92,7 +92,7 @@ export default {
 <style scoped>
   .weather-card {
     width: 15%;
-    min-width: 100px;
+    min-width: 130px;
     min-height: 164px;
     padding: 8px 5px;
     text-align: center;

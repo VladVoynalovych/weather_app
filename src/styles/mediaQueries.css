@@ -1,5 +1,5 @@
-@media screen and (max-width: 940px) {
-    .weather-cards-wrapper {
+@media screen and (max-width: 980px) {
+    #app .weather-cards-wrapper {
         flex-direction: column;
     }
 
@@ -23,13 +23,13 @@
 }
 
 @media screen and (max-width: 500px) {
-    .city-card,
-    .favourite-city-card {
+    #app .city-card,
+    #app .favourite-city-card {
         width: 90%;
     }
 
-    .city-card .weather-chart,
-    .favourite-city-card .weather-chart {
+    #app .city-card .weather-chart,
+    #app .favourite-city-card .weather-chart {
         width: 100%;
     }
 

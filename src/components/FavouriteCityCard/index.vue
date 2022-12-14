@@ -19,8 +19,7 @@
       v-show="cityCard.weatherList"
     >
       <weather-card
-        v-show="isWeeklyWeatherShow"
-        v-for="(weatherItem, weatherIndex) in cityCard.weatherList"
+        v-for="(weatherItem, weatherIndex) in weatherList"
         :key="weatherIndex"
         :date="getFormattedDate(weatherItem[0].date)"
         :temperature="String(weatherItem[0].temperature)"
@@ -28,16 +27,6 @@
         :weather-icon="weatherItem[0].icon"
         :humidity="String(weatherItem[0].humidity)"
         :wind="String(weatherItem[0].windSpeed)"
-      ></weather-card>
-
-      <weather-card
-        v-show="!isWeeklyWeatherShow"
-        :date="getFormattedDate(dailyWeather.date)"
-        :temperature="String(dailyWeather.temperature)"
-        :feels-like="String(dailyWeather.feelsLike)"
-        :weather-icon="dailyWeather.icon"
-        :humidity="String(dailyWeather.humidity)"
-        :wind="String(dailyWeather.windSpeed)"
       ></weather-card>
     </section>
     <weather-chart
@@ -90,6 +79,16 @@
     computed: {
       dailyWeather() {
         return this.cityCard.weatherList[0][0];
+      },
+      weatherList() {
+        if (this.isWeeklyWeatherShow) {
+          return this.cityCard.weatherList;
+        } else {
+          let weatherList = JSON.stringify(this.cityCard.weatherList);
+          weatherList = JSON.parse(weatherList);
+          weatherList.length = 1;
+          return weatherList
+        }
       }
     },
     data() {

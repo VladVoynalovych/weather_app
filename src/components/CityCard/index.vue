@@ -16,11 +16,10 @@
     </section>
     <section
       class="weather-cards-wrapper"
-      v-show="cityCard.weatherList"
+      v-if="cityCard.weatherList"
     >
       <weather-card
-        v-show="isWeeklyWeatherShow"
-        v-for="(weatherItem, weatherIndex) in cityCard.weatherList"
+        v-for="(weatherItem, weatherIndex) in weatherList"
         :key="weatherIndex"
         :date="getFormattedDate(weatherItem[0].date)"
         :temperature="String(weatherItem[0].temperature)"
@@ -28,16 +27,6 @@
         :weather-icon="weatherItem[0].icon"
         :humidity="String(weatherItem[0].humidity)"
         :wind="String(weatherItem[0].windSpeed)"
-      ></weather-card>
-
-      <weather-card
-        v-show="!isWeeklyWeatherShow"
-        :date="getFormattedDate(dailyWeather.date)"
-        :temperature="String(dailyWeather.temperature)"
-        :feels-like="String(dailyWeather.feelsLike)"
-        :weather-icon="dailyWeather.icon"
-        :humidity="String(dailyWeather.humidity)"
-        :wind="String(dailyWeather.windSpeed)"
       ></weather-card>
     </section>
     <weather-chart
@@ -113,7 +102,17 @@
       dailyWeather() {
         return this.cityCard.weatherList[0][0];
       },
-      ...mapGetters('favouritesModule', ['getFavouritesContent', 'getFavouritesContentLength'])
+      ...mapGetters('favouritesModule', ['getFavouritesContent', 'getFavouritesContentLength']),
+      weatherList() {
+        if (this.isWeeklyWeatherShow) {
+          return this.cityCard.weatherList;
+        } else {
+          let weatherList = JSON.stringify(this.cityCard.weatherList);
+          weatherList = JSON.parse(weatherList);
+          weatherList.length = 1;
+          return weatherList
+        }
+      }
     },
     data() {
       return {
@@ -206,9 +205,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 95%;
     height: auto;
+    margin: 0 auto;
     padding-top: 10px;
+  }
+
+  .weather-cards-wrapper .weather-card:last-child {
+    margin-right: 0;
   }
 
   .weather-button_daily,

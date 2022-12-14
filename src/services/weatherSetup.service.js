@@ -38,7 +38,7 @@ function splitWeatherByDate(weatherList, daysCount = 5) {
   weatherList.forEach((item, index) => {
     if (currentDay === new Date(item.date).getDate()) {
       dailyWeatherList.push(item)
-      if (index === weatherList.length - 1) {
+      if (index === weatherList.length - 1 && daysPassed < daysCount) {
         weatherListByDate.push(dailyWeatherList);
       }
     } else {
