@@ -12,21 +12,21 @@
 </template>
 
 <script>
-import dayIcon1 from './media/images/01d.png'
-import dayIcon2 from './media/images/02d.png'
-import dayIcon3 from './media/images/03d.png'
-import dayIcon4 from './media/images/04d.png'
-import dayIcon5 from './media/images/09d.png'
-import dayIcon6 from './media/images/10d.png'
-import dayIcon7 from './media/images/11d.png'
-import dayIcon8 from './media/images/13d.png'
-import dayIcon9 from './media/images/50d.png'
+import dayIcon1 from '@/assets/WeatherCard/01d.png'
+import dayIcon2 from '@/assets/WeatherCard/02d.png'
+import dayIcon3 from '@/assets/WeatherCard/03d.png'
+import dayIcon4 from '@/assets/WeatherCard/04d.png'
+import dayIcon5 from '@/assets/WeatherCard/09d.png'
+import dayIcon6 from '@/assets/WeatherCard/10d.png'
+import dayIcon7 from '@/assets/WeatherCard/11d.png'
+import dayIcon8 from '@/assets/WeatherCard/13d.png'
+import dayIcon9 from '@/assets/WeatherCard/50d.png'
 
-import nightIcon1 from './media/images/01n.png'
-import nightIcon2 from './media/images/02n.png'
-import nightIcon6 from './media/images/10n.png'
+import nightIcon1 from '@/assets/WeatherCard/01n.png'
+import nightIcon2 from '@/assets/WeatherCard/02n.png'
+import nightIcon6 from '@/assets/WeatherCard/10n.png'
 
-import { iconNames } from './iconNames';
+import { iconNames } from '@/assets/WeatherCard/iconNames';
 
 export default {
   name: "WeatherCard",
