@@ -53,7 +53,7 @@
         data: {
           labels: this.labels,
           datasets: [{
-            label: 'Weather',
+            label: 'Temperature',
             data: this.chartData,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -89,13 +89,13 @@
 <style scoped>
   .weather-chart {
     margin: 10px auto;
-    width: 65%;
-    height: max-content;
+    width: 90%;
+    height: 40%;
   }
 
   .weather-chart_canvas {
     width: 100%;
-    min-width: 320px;
-    min-height: 300px;
+    min-width: 200px;
+    min-height: 160px;
   }
 </style>

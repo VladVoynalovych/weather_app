@@ -92,10 +92,12 @@ export default {
 <style scoped>
   .weather-card {
     width: 15%;
-    min-height: 120px;
+    min-width: 100px;
+    min-height: 164px;
     padding: 8px 5px;
     text-align: center;
     border: 1px solid #c4c4c4;
+    box-sizing: initial;
   }
 
   .weather-card.active {
@@ -105,7 +107,7 @@ export default {
   .date {
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.375;
     color: #2b2b2b;
   }
@@ -132,7 +134,7 @@ export default {
   .humidity {
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.187;
     color: #2b2b2b;
   }

@@ -61,20 +61,33 @@ export default {
 <style scoped>
   .row {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
     height: 100%;
     width: 100%;
+    margin-top: 10px;
   }
 
   .buttons-wrapper {
     display: flex;
     align-items: center;
-    width: 50%;
+    width: auto;
     height: 35px;
-    margin-top: 10px;
   }
 
-  .buttons-wrapper .card-button {
+  .buttons-wrapper .card-button.main {
     margin-right: 10px;
+  }
+
+  @media screen and (max-width: 530px) {
+    .buttons-wrapper {
+      margin-bottom: 10px;
+    }
+
+    .row {
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 </style>

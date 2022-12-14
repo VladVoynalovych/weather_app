@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
+    min-width: 60px;
     min-height: 35px;
     border: 1px solid #c4c4c4;
     background-color: #ffffff;

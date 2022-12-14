@@ -191,13 +191,13 @@
   }
 
   .weather-card {
-    margin-right: 5px;
+    margin-right: 15px;
   }
 
   .weather-type-buttons-wrapper {
     margin-left: 26px;
     display: flex;
-    width: 30%;
+    width: fit-content;
     align-items: center;
     height: auto;
   }
@@ -211,13 +211,15 @@
     padding-top: 10px;
   }
 
-  .weather-button {
+  .weather-button_daily,
+  .weather-button_favourites,
+  .weather-button_delete {
     margin-right: 10px;
   }
 
   .city-name {
     padding-top: 10px;
-    font-size: 2vw;
+    font-size: 20px;
   }
 
   .activity-buttons-wrapper {

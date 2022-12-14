@@ -142,12 +142,13 @@
 
 <style scoped>
   .weather-search {
+    width: 30%;
     display: flex;
   }
 
   .weather-search_search-autocomplete-wrap {
     position: relative;
-    width: 60%;
+    width: 100%;
   }
 
   .weather-search_search-input {
@@ -159,7 +160,7 @@
     outline: none;
     font-weight: 300;
     color: #c4c4c4;
-    font-size: 2.3vw;
+    font-size: 140%;
     padding-left: 3px;
   }
 
@@ -182,7 +183,7 @@
 
   .card-button {
     box-sizing: border-box;
-    width: 100px;
     border-left: unset;
+    width: 20%;
   }
 </style>
