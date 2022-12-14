@@ -1,0 +1,44 @@
+@media screen and (max-width: 940px) {
+    .weather-cards-wrapper {
+        flex-direction: column;
+    }
+
+    #app .weather-card {
+        width: 56%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    #app .weather-search {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    #app .weather-search {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .city-card,
+    .favourite-city-card {
+        width: 90%;
+    }
+
+    .city-card .weather-chart,
+    .favourite-city-card .weather-chart {
+        width: 100%;
+    }
+
+    .weather-button.card-button {
+        padding: 5px 7px;
+    }
+
+    #app .weather-type-buttons-wrapper {
+        margin-left: unset;
+        margin: 0 auto;
+    }
+}
