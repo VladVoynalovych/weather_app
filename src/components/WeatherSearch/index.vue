@@ -38,7 +38,7 @@
   /* eslint-disable */
 
   const citiesData = require('./cities.json');
-  import CardButton from "@/components/CardButton/CardButton";
+  import CardButton from "@/components/CardButton/index";
   import InfoModal from "@/components/InfoModal";
 
   import { mapActions, mapGetters } from 'vuex';

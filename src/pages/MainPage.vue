@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import CityCard from "@/components/CityCard/CityCard";
+  import CityCard from "@/components/CityCard";
 
   import { mapGetters, mapActions } from 'vuex';
 

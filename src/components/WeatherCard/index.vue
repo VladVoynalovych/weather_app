@@ -2,12 +2,12 @@
   <div
     class="weather-card"
   >
-    <p class="date" v-text="date"></p>
-    <img class="weather-icon" alt="Weather Icon" :src="iconSettings[weatherIcon]">
-    <p class="temperature">Temperature: {{temperature}} °C</p>
-    <p class="feels-like">Feels like: {{feelsLike}} °C</p>
-    <p class="wind">Wind: {{wind}} m/s</p>
-    <p class="humidity">Humidity: {{humidity}} %</p>
+    <p class="weather-card_date" v-text="date"></p>
+    <img class="weather-card_icon" alt="Weather Icon" :src="iconSettings[weatherIcon]">
+    <p class="weather-card_temperature">Temperature: {{temperature}} °C</p>
+    <p class="weather-card_feels-like">Feels like: {{feelsLike}} °C</p>
+    <p class="weather-card_wind">Wind: {{wind}} m/s</p>
+    <p class="weather-card_humidity">Humidity: {{humidity}} %</p>
   </div>
 </template>
 
@@ -100,11 +100,11 @@ export default {
     box-sizing: initial;
   }
 
-  .weather-card.active {
+  .weather-card_active {
     border: 1px solid #0079b7;
   }
 
-  .date {
+  .weather-card_date {
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -112,7 +112,7 @@ export default {
     color: #2b2b2b;
   }
 
-  .month {
+  .weather-card_month {
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -121,17 +121,17 @@ export default {
     margin-bottom: 5px;
   }
 
-  .weather-icon {
+  .weather-card_icon {
     display: block;
     width: 50px;
     height: 50px;
     margin: 0 auto 5px auto;
   }
 
-  .temperature,
-  .feels-like,
-  .wind,
-  .humidity {
+  .weather-card_temperature,
+  .weather-card_feels-like,
+  .weather-card_wind,
+  .weather-card_humidity {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;

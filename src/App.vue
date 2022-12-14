@@ -5,7 +5,7 @@
 </template>
 
 <style>
-  @import "./styles/mediaqueries.css";
+  @import "styles/mediaQueries.css";
 * {
   margin: 0;
   padding: 0;

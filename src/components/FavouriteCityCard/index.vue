@@ -1,15 +1,15 @@
 <template>
   <div class="favourite-city-card">
-    <h1 class="city-name">{{cityCard.cityName}}</h1>
+    <h1 class="city-card__city-name">{{cityCard.cityName}}</h1>
     <section class="weather-type-buttons-wrapper">
       <card-button
-        :class="['weather-button', 'weather-button_daily', { active: !isWeeklyWeatherShow }]"
+        :class="['weather-button', 'weather-button_daily', { 'card-button_active': !isWeeklyWeatherShow }]"
         :button-text="'Daily'"
         @click.native="isWeeklyWeatherShow = false"
       ></card-button>
 
       <card-button
-        :class="['weather-button', 'weather-button_weekly', { active: isWeeklyWeatherShow }]"
+        :class="['weather-button', 'weather-button_weekly', { 'card-button_active': isWeeklyWeatherShow }]"
         :button-text="'Weekly'"
         @click.native="isWeeklyWeatherShow = true"
       ></card-button>
@@ -59,9 +59,9 @@
 
 <script>
   import moment from "moment";
-  import WeatherCard from "@/components/WeatherCard/WeatherCard";
+  import WeatherCard from "@/components/WeatherCard";
   import WeatherChart from "@/components/WeatherChart";
-  import CardButton from "@/components/CardButton/CardButton";
+  import CardButton from "@/components/CardButton";
 
   import { mapActions } from "vuex";
 
@@ -168,7 +168,7 @@
     margin-right: 10px;
   }
 
-  .city-name {
+  .city-card__city-name {
     padding-top: 10px;
     font-size: 20px;
   }

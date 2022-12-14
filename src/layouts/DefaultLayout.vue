@@ -4,17 +4,17 @@
       <img :src="logo" alt="" class="logo">
       <section class="row">
         <section class="buttons-wrapper">
-          <CardButton
-            :class="['main', { active: this.currentNavigation === 'Main' }]"
+          <card-button
+            :class="['main', { 'card-button_active': this.currentNavigation === 'Main' }]"
             :button-text="'Main'"
             @click.native="goTo('/')"
-          ></CardButton>
+          ></card-button>
 
-          <CardButton
-            :class="['favourites', { active: this.currentNavigation === 'Favourites' }]"
+          <card-button
+            :class="['favourites', { 'card-button_active': this.currentNavigation === 'Favourites' }]"
             :button-text="'Favourites'"
             @click.native="goTo('/favourites')"
-          ></CardButton>
+          ></card-button>
         </section>
         <weather-search></weather-search>
       </section>
@@ -30,9 +30,8 @@ import logo from '@/assets/logo.svg';
 // media
 
 // components
-import CardButton from "@/components/CardButton/CardButton"
+import CardButton from "@/components/CardButton"
 import WeatherSearch from "@/components/WeatherSearch";
-
 // components
 
 export default {

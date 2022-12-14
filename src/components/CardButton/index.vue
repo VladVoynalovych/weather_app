@@ -1,6 +1,6 @@
 <template>
   <div class="card-button">
-    <p class="button-text">{{buttonText}}</p>
+    <p class="card-button__text">{{buttonText}}</p>
   </div>
 </template>
 
@@ -30,13 +30,13 @@
     padding: 10px 20px;
   }
 
-  .card-button.active,
+  .card-button_active,
   .card-button:active {
     border: 1px solid #2196f3;
     background-color: #2196f3;
   }
 
-  .button-text {
+  .card-button__text {
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -48,8 +48,8 @@
                 background-color .1s ease 0s;
   }
 
-  .card-button.active .button-text,
-  .card-button:active .button-text {
+  .card-button_active .card-button__text,
+  .card-button:active .card-button__text {
     color: #fff;
   }
 </style>
